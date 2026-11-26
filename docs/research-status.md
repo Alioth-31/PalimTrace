@@ -1,7 +1,15 @@
-# 当前检查点：E13
+# Research status / 研究状态
 
-主线为生成机制特异性证据发现，不是单纯追求分类准确率或重复增加统计模型。既有研究未能证明一般性的生成特异性指纹；部分方法在普通 JPEG、缩放、局部编辑及未知历史下失效。E13 的相位聚合性质已在便利图像验证，但不意味着可识别生成来源。
+## Baseline / 初始研究基线
 
-下一阶段优先获得原生像素对齐的真实摄影、神经重构、生成式编辑、背景恢复及掩膜数据。按图像来源隔离发现集和确认集，使用普通编辑作为阴性对照，预先定义评价指标。候选证据需解释形成机制、排除混淆并验证跨架构稳定性，再决定是否进入新算法开发。数据未取得前，不将模拟结果作为真实 AIGC 证据。
+Version 0.1.0 contains a cross-scale phase-dependence experiment using seven public convenience examples. Circular-shift invariance is a property of the statistic under the specified grid; source-specific detection remains unestablished.
 
-参考入口：INP-X (arXiv:2602.00192)、Synthbuster (doi:10.5281/zenodo.10066460)、Stable Diffusion 官方样例（CompVis/stable-diffusion）。公开可访问不代表许可已核查。
+0.1.0 包含七张公开便利样例的跨尺度依赖相位实验。循环平移不变性属于指定分析条件下的统计量性质，生成特异性识别能力尚未建立。
+
+## Research priorities / 研究重点
+
+Obtain pixel-aligned photographs, neural reconstructions, generative edits and masks. Use conventional edits as negative controls, isolate source groups between discovery and confirmation, and evaluate transfer across architectures and processing histories.
+
+获得像素对齐的摄影原图、神经重构、生成式编辑及掩膜；以传统编辑为阴性对照，按图像来源隔离发现集和确认集，检验跨架构及处理链路的泛化能力。
+
+References / 数据与文献入口: [INP-X](https://arxiv.org/abs/2602.00192), [Synthbuster](https://doi.org/10.5281/zenodo.10066460), [Stable Diffusion](https://github.com/CompVis/stable-diffusion).

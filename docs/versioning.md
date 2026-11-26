@@ -1,9 +1,10 @@
-# 版本管理
+# Version policy / 版本管理
 
-- main：可核查的研究检查点。阶段完整且完成验证后再提交或合并。
-- research/e14-<topic> 等：独立假设、实验设计和验证；不为每次参数微调创建提交。
-- fix/<topic>：已有研究的实质性错误修正。
-- E 编号标识实验；v0.x.y 标识完整的归档版本。首个完整归档建议 v0.1.0；未完成全量同步前不打版本标签。
-- 提交记录目的、输入来源、主要变更、验证与限制。负面结果保留，不覆盖旧记录；重分析关联输入哈希或原提交。
-- 合并前复核隐私、来源授权、数据泄漏、组间隔离、统计口径和复现测试。禁止 force push；不自动发布 Release。
-- GitHub 分支保护、访问权限、邮箱隐私等为平台配置，本文件不代表已经启用。
+- **main:** reviewed research checkpoints / 已审核的研究检查点。
+- **research/<topic>:** hypothesis-driven work / 按研究问题组织实验。
+- **fix/<topic>:** substantive corrections / 实质性错误修复。
+- **Versions / 版本:** start at 0.1.0; increment for coherent research milestones, not individual parameter changes / 从 0.1.0 起，按完整科研节点递增版本，而非逐次参数调整。
+- Preserve negative results and source provenance; link reanalysis to input hashes / 保留负面结果和来源记录，重分析关联输入哈希。
+- Review reproducibility, data separation and privacy before merging; avoid force pushes / 合并前检查复现性、数据隔离和隐私，不随意强制推送。
+
+Repository settings and release tags are managed separately from this policy. / 平台配置及发行标签独立管理。

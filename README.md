@@ -1,25 +1,81 @@
+<div align="center">
+
 # PalimTrace
 
-Statistical Forensics of Image Generation Histories
+**Statistical Forensics of Image Generation Histories**
 
-数字图像生成痕迹、统计取证与水印研究。研究目标是分辨图像生成、神经解码、主动标识与传播处理留下的证据，确定证据能够支持的来源命题及其边界。算法选择服从科学问题，不预设必须使用神经网络或某种计算设备。
+[![Version](https://img.shields.io/badge/version-0.1.0-334155)](VERSION)
+[![Research](https://img.shields.io/badge/research-exploratory-64748b)](docs/research-status.md)
+[![Python](https://img.shields.io/badge/Python-NumPy%20%7C%20Pillow-3776AB)](experiments/phase-dependence/README.md)
 
-## Research status
+English · [简体中文](README.zh-CN.md)
 
-探索性研究，尚无经过独立大规模真实数据验证的原创 AIGC 检测器。
+[Research](docs/research-index.md) · [Experiment](experiments/phase-dependence/README.md) · [Reproduce](#reproduce)
 
-- E01–E05：水印信号、可解码性及共享预算。
-- E06–E10：统计取证、混杂因素与生成历史推断。
-- E11–E13：复合假设识别边界、依赖估计与公开真实图像初步核验。
+</div>
 
-当前远程快照包含研究索引、管理规范和 E13 的复现代码及原始派生统计。E01–E12 的完整历史归档尚未同步，不将其描述为本仓库已发布的文件。
+## Research scope
 
-## Navigation
+PalimTrace investigates the statistical traces left by image synthesis, neural reconstruction, watermark embedding and subsequent processing. Its central question is which observations support a specific claim about an image's production history, and under what conditions that claim remains identifiable.
 
-- [研究索引](docs/research-index.md)
-- [当前研究检查点](docs/research-status.md)
-- [E13 实验与复现](experiments/watermark_E13/README.md)
-- [版本管理](docs/versioning.md)
-- [隐私与发布边界](docs/privacy.md)
+```mermaid
+flowchart LR
+    A[Image history] --> B[Observed image]
+    B --> C[Statistical evidence]
+    C --> D[Controlled comparisons]
+    D --> E[Supported provenance claims]
+    D --> F[Confounding and ambiguity]
+```
 
-第三方原始图像、模型权重、个人数据与访问凭证不进入 Git。公开可访问不等于获得开源再分发许可；项目暂未授予开源许可证。
+| Research direction | Focus |
+| --- | --- |
+| Generative fingerprints | Mechanism-specific evidence across models and image content |
+| Digital watermarking | Signal preservation, detection and robustness |
+| Statistical forensics | Multiscale dependencies, periodic structure and processing confounds |
+| Provenance identifiability | Evidence limits and uncertainty under competing histories |
+
+## Initial experiment: cross-scale phase dependence
+
+The initial experiment measures conditional correlation between fine and coarse Haar detail energies over a 4 × 4 sampling phase grid. Phase averaging is invariant to circular integer translation under the stated grid conditions.
+
+| Public example | Mean dependence | Phase range |
+| --- | ---: | ---: |
+| Stable Diffusion output 2 | 0.8635 | 0.0493 |
+| Stable Diffusion output 3 | 0.8667 | 0.0427 |
+| BDD100K source frame | 0.9106 | 0.1322 |
+| UCF source frame | 0.8673 | 0.0877 |
+
+**Observation.** In seven convenience images, the maximum circular-shift error of the phase mean was 6.66 × 10⁻¹⁶. Genuine camera-source images can exhibit stronger phase variation than generated examples. These measurements characterize the feature, not detection accuracy or origin probabilities.
+
+[Method and limitations](experiments/phase-dependence/README.md) · [Measurements](experiments/phase-dependence/results.csv) · [Source manifest](experiments/phase-dependence/sources.csv)
+
+## Reproduce
+
+```bash
+git clone https://github.com/Alioth-31/PalimTrace.git
+cd PalimTrace
+python -m pip install -r requirements.txt
+python experiments/phase-dependence/phase_profile.py --download
+```
+
+Source images are not redistributed. Review source permissions before downloading. The script checks Git blob hashes and records failures; the original measurements used JavaScript decoders, so Pillow results may differ slightly.
+
+## Repository
+
+```text
+PalimTrace/
+├── README.md
+├── README.zh-CN.md
+├── VERSION
+├── requirements.txt
+├── docs/
+├── experiments/
+│   └── phase-dependence/
+└── data/
+```
+
+See the [research index](docs/research-index.md), [research status](docs/research-status.md), [version policy](docs/versioning.md) and [data and privacy policy](docs/privacy.md).
+
+## Status and rights
+
+Version 0.1.0 is an exploratory research baseline, not a validated universal image detector. No open-source license has been granted. Third-party material remains subject to its original terms.

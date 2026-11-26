@@ -1,4 +1,4 @@
-"""Recompute the E13 4x4 phase-orbit statistics from source images.
+"""Recompute the 4x4 phase-orbit statistics from source images.
 The recorded study used jpeg-js/UPNG.js decoders; Pillow may differ slightly.
 """
 import argparse, csv, hashlib, io, json, urllib.request
